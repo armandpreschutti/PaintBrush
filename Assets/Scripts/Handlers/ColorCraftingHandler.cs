@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ColorCraftingHandler : MonoBehaviour
 {
     public Color color1;
     public Color color2;
     public Color colorResult;
-    public Image backgroundImage;
-    public float debugHue;
     public float hue1;
     public float hue2;
     public float hueDistance;
     public float halfDistance;
     public float finalHue;
 
+
     public void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            MixColor(color1, color2);
-            backgroundImage.color = colorResult;
+            CreateRandomColor();
         }
     }
     public void MixColor(Color c1, Color c2)
@@ -75,6 +74,14 @@ public class ColorCraftingHandler : MonoBehaviour
         finalHue /= 360;
         colorResult = Color.HSVToRGB(finalHue, .90f, .95f);
     }
+    
+    public void CreateRandomColor()
+    {
+
+        colorResult = Color.HSVToRGB(Random.Range(0f, 1f), .90f, .95f);
+    }
+    
+
 
 }
 

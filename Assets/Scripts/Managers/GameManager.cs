@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager gameInstance;
 
+   
+    public GameObject gameOverPanel;
     /// <summary>
     /// On awake, this function sets this game object to a game manager singleton
     /// </summary

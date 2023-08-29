@@ -5,11 +5,21 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class SlotHandler : MonoBehaviour, IDropHandler
 {
-    public Color slottedColor;
-    private void Awake()
+    [SerializeField] ColorCraftingHandler colorCraftingHandler;
+
+    public enum ObjectType
     {
-        slottedColor = Color.black;
-        slottedColor.a = 100;
+        FirstColorSlot,
+        SecondColorSlot,
+        ColorHUDSlot,
+        PrimaryColorSlot,
+        EquipColorSlot
+    }
+    public ObjectType objectType;
+
+    private void Start()
+    {
+        colorCraftingHandler = GameObject.Find("CraftingBar").GetComponent<ColorCraftingHandler>();
     }
     public void OnDrop(PointerEventData eventData)
     {
@@ -18,7 +28,24 @@ public class SlotHandler : MonoBehaviour, IDropHandler
             RectTransform colorTransform = eventData.pointerDrag.GetComponent<RectTransform>();
             colorTransform.SetParent(this.GetComponent<RectTransform>());  
             colorTransform.anchoredPosition= Vector3.zero;
-            slottedColor = colorTransform.GetComponent<Image>().color;
+            colorTransform.GetComponent<DragHandler>().SetColorPositionData();
+            switch (objectType)
+            {
+                case ObjectType.FirstColorSlot:
+                   
+                    colorCraftingHandler.color1 = eventData.pointerDrag.GetComponent<Image>().color;
+                    break;
+                case ObjectType.SecondColorSlot:
+                    colorCraftingHandler.color2 = eventData.pointerDrag.GetComponent<Image>().color;
+                    break;
+                case ObjectType.EquipColorSlot:
+                    colorCraftingHandler.equippedColor = eventData.pointerDrag.GetComponent<Image>().color;
+                    colorCraftingHandler.EquipColor();
+
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

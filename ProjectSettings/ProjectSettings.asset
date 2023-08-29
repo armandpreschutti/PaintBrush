@@ -44,10 +44,6 @@ PlayerSettings:
     duration: 2
   - logo: {fileID: 21300000, guid: 57ff5aea26470654491b1532ef3418f1, type: 3}
     duration: 2
-  - logo: {fileID: 21300000, guid: 13d92d5a262d5b2498aa886bf8d129d4, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 769eb3447db8a2142857c42b29a62f3a, type: 3}
-    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
@@ -141,7 +137,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.2.0
+  bundleVersion: 1.0.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0

@@ -15,24 +15,24 @@ public class ColorCraftingHandler : MonoBehaviour
     public float hueDistance;
     public float halfDistance;
     public float finalHue;
-
+    [SerializeField] GameObject colorObject;
+    public Color equippedColor;
+    public GameObject player;
+    public GameObject hudColor;
 
     public void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            CreateRandomColor();
-        }
+        
     }
-    public void MixColor(Color c1, Color c2)
+    public void MixColor()
     { 
         // create variables for hue, saturation, and value of both colors
         float h1, s1, v1;
         float h2, s2, v2;
 
         // convert colors from RGB to HSV then output results to variables above
-        Color.RGBToHSV(c1, out h1, out s1, out v1);
-        Color.RGBToHSV(c2, out h2, out s2, out v2);
+        Color.RGBToHSV(color1, out h1, out s1, out v1);
+        Color.RGBToHSV(color2, out h2, out s2, out v2);
 
         // check and set highest hue to be first, then lowest hue to be second
         if(h1 < h2)
@@ -73,12 +73,22 @@ public class ColorCraftingHandler : MonoBehaviour
 
         finalHue /= 360;
         colorResult = Color.HSVToRGB(finalHue, .90f, .95f);
+        GameObject newColorObject =  Instantiate(colorObject);
+        newColorObject.GetComponent<DragHandler>().GetComponent<RectTransform>().SetParent(GameObject.Find("Slot1").GetComponent<RectTransform>());
+        newColorObject.GetComponent<RectTransform>().anchoredPosition= new Vector2(0, 0);
+        newColorObject.GetComponent<Image>().color = colorResult;
+        colorResult = Color.HSVToRGB(0, 0, 0);
     }
     
     public void CreateRandomColor()
     {
 
         colorResult = Color.HSVToRGB(Random.Range(0f, 1f), .90f, .95f);
+    }
+    public void EquipColor()
+    {
+        player.GetComponent<LocomotionHandler>().currentColor = equippedColor;
+        hudColor.GetComponent<Image>().color = equippedColor;
     }
     
 
